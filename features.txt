@@ -1,0 +1,13 @@
+Command to return summary of a star wars concept via wookieepedia
+
+Command to make a session note that is automatically stores
+
+Command to make a character and a note about that character
+
+Multiple independent projects
+
+MongoDB backend
+
+random name generator by universe
+
+Todo's for later: e.g. find name for the drall/selonia gang.
