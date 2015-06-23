@@ -6,22 +6,36 @@ from django.contrib.contenttypes.models import ContentType
 '''
     A game master can take a note and it will be logged under that particular session.
     A game master can take a note and attach it to a particular character by name.
+    A game master can have multiple campaigns running with their own sessions and characters and notes
 '''
+
+class Campaign(models.Model):
+    '''A series of connected sessions of reoccuring characters.'''
+    name = models.CharField("Name", max_length=200)
+    start_date = models.DateTimeField("Start Date")
+    #system
+    notes = generic.GenericRelation("Note")
+    def __str__(self):
+        return self.name
 
 class Session(models.Model):
     '''A single session of play that has a start date.'''
     sess_date = models.DateTimeField("Session Date")
     notes = generic.GenericRelation("Note")
+    campaign = models.ForeignKey(Campaign)
     def __str__(self):
         return str(self.sess_date)[0:9]
 
 class Character(models.Model):
+    '''A single character that may appear in multiple sessions in a single campaign'''
     name = models.CharField("Name", max_length=1000)
     notes = generic.GenericRelation("Note")
+    campaign = models.ForeignKey(Campaign)
     def __str__(self):
         return self.name
 
 class Note(models.Model):
+    '''A string of text that may be associated with a campaign, a character, or a session'''
     note_text = models.CharField("Note", max_length=1000)
     pub_date = models.DateTimeField("Date Taken")
     content_type = models.ForeignKey(ContentType)
