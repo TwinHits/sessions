@@ -1,6 +1,9 @@
 # ttghelper
 
-This is a python 3.4 library of helper command line scripts for tabletop gaming game masters.
+This is a django fueled app designed to help game masters store and manager session information.
+
+Session:
+	Take notes and applies them to characters or sessions, callable via the session or the character
 
 sw.wookscrapper(string article):
 	Take a string and return the summary of the wookiepedia article by that name to the command line. When given no argument, user will be prompted.
