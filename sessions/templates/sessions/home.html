@@ -1,0 +1,6 @@
+{% extends "sessions/base.html" %}
+{% block content %}
+	{% for c in campaigns %}
+	<a href='{% url "sessions.views.campaign_detail" pk=c.pk %}'>{{ c.name }}</a>
+	{% endfor %}
+{% endblock content %}

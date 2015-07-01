@@ -11,7 +11,7 @@ from django.contrib.contenttypes.models import ContentType
 
 class Campaign(models.Model):
     '''A series of connected sessions of reoccuring characters.'''
-    campaign_name = models.CharField("Campaign Name", max_length=255)
+    name = models.CharField("Campaign Name", max_length=255)
     start_date = models.DateTimeField("Start Date")
     system = {
             "swd6": "swd6", 
@@ -22,7 +22,7 @@ class Campaign(models.Model):
             }
     campaign_notes = generic.GenericRelation("Note")
     def __str__(self):
-        return self.campaign_name
+        return self.name
 
 class Session(models.Model):
     '''A single session of play that has a start date.'''
@@ -30,15 +30,15 @@ class Session(models.Model):
     sessions_notes = generic.GenericRelation("Note")
     campaign = models.ForeignKey(Campaign)
     def __str__(self):
-        return str(self.sess_date)[0:9]
+        return str(self.sess_date)[0:10]
 
 class Character(models.Model):
     '''A single character that may appear in multiple sessions in a single campaign'''
-    char_name = models.CharField("Character Name", max_length=255)
+    name = models.CharField("Character Name", max_length=255)
     notes = generic.GenericRelation("Note")
     campaign = models.ForeignKey(Campaign)
     def __str__(self):
-        return self.char_name
+        return self.name
 
 class Note(models.Model):
     '''A string of text that may be associated with a campaign, a character, or a session'''

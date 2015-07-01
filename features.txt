@@ -11,3 +11,12 @@ MongoDB backend
 random name generator by universe
 
 Todo's for later: e.g. find name for the drall/selonia gang.
+
+
+
+
+
+
+
+Home Page:
+	Show current Campaigns and the last session date. Buttons that activate that session.
