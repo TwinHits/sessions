@@ -11,6 +11,7 @@ from ttgsessions.models import Campaign, Session, Character, Note
 from sys import argv
 
 def session_start():
+    '''requests campaign name from the user in order to categorize later actions'''
     campaign = input("Campaign:")
     if not Campaign.objects.get(name=campaign):
         if input("This campaign is unknown. Create new?").upper() == "YES" or "Y":
