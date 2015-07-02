@@ -14,5 +14,8 @@ def sessions_home(request):
 def campaign_detail(request, pk):
     """Returns detail view of a campaign. This campaign is now the active campaign"""
     campaign = get_object_or_404(Campaign, pk=pk)
-    #active_campaign = campaign
+    #active_campaign = campaign?
     return render(request, "sessions/campaign_detail.html", {"campaign": campaign})
+
+def campaign_new(request):
+    return render(request, "sessions/campaign_new.html")
