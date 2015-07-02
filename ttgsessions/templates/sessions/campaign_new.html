@@ -2,4 +2,8 @@
 
 {% block content %}
 <div>New Campaign Form</div>
+<form method="POST">{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Save</button>
+</form
 {% endblock %}

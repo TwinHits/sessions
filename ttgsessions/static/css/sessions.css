@@ -11,7 +11,7 @@ body {
 
 .box {
 	text-align: center;
-	border: 3px solid black;
+	border: 1px solid black;
 	width: 50%;
-	min-height: 75px;
+	min-height: 80px;
 }
