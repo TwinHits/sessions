@@ -1,22 +1,19 @@
 Command to return summary of a star wars concept via wookieepedia
-
 Command to make a session note that is automatically stores
-
 Command to make a character and a note about that character
 
-Multiple independent projects
 
-MongoDB backend
 
 random name generator by universe
-
-Todo's for later: e.g. find name for the drall/selonia gang.
-
-
-
-
 
 
 
 Home Page:
 	Show current Campaigns and the last session date. Buttons that activate that session.
+	Button that creates a new campaign as the last box
+
+Campaign_Detail
+	See sessions. 
+
+Session_detail:
+	Tools that are used during play. Scrapper, name generator, etc. All based on the system that is being used.
