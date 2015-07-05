@@ -21,17 +21,18 @@ class SessionsViewsTest(TestCase):
 
 
     def test_home(self):
-        """Test the home page"""
+        """Test the home page, comparing list of all campaigns vs campaigns provided to view"""
         resp = self.client.get("/sessions/")
         self.assertEqual(resp.status_code, 200)
         self.assertTrue("campaigns" in resp.context)
+        self.assertListEqual(list(Campaign.objects.all()), list(resp.context["campaigns"]))
 
 
     def test_campaign_detail(self):
         """Test the campaign view with a random campaign"""
         campaigns = Campaign.objects.all() 
         c = random.choice(campaigns)
-        #test 200 and data validity
+        #test 200 and data transfer
         resp = self.client.get("/sessions/" + str(c.pk) + "/")
         self.assertEqual(resp.status_code, 200)
         self.assertTrue("campaign" in resp.context)
@@ -49,9 +50,8 @@ class SessionsViewsTest(TestCase):
     def test_session_detail(self):
         """Test the session detail page wth a random session."""
         s = random.choice(Session.objects.all())
-        #test 200 and data validity
+        #test 200 and data transfer
         resp = self.client.get("/sessions/" + str(s.campaign.pk) + "/" + str(s.pk) + "/")
-        print("/sessions/" + str(s.campaign.pk) + "/" + str(s.pk) + "/")
         self.assertEqual(resp.status_code, 200)
         self.assertTrue("campaign" in resp.context)
         self.assertTrue("session" in resp.context)
