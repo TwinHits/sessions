@@ -38,4 +38,4 @@ def session_detail(request, c, s):
     campaign = Campaign.objects.get(pk=c) 
     session = Session.objects.get(pk=s)
     notes = session.sessions_notes.all()
-    return render(request, "sessions/session_detail.html", {"campaign": campaign, "sessions":session, "notes":notes})
+    return render(request, "sessions/session_detail.html", {"campaign": campaign, "session":session, "notes":notes})
