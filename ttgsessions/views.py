@@ -13,12 +13,13 @@ def sessions_home(request):
     campaigns = Campaign.objects.all()
     return render(request, "sessions/home.html", {"campaigns": campaigns})
 
-def campaign_detail(request, c):
+def campaign_detail(request, campaign):
     """Returns detail view of a campaign. This campaign is now the active campaign"""
-    campaign = get_object_or_404(Campaign, pk=c)
-    sessions = Session.objects.filter(campaign=c)
+    campaign = get_object_or_404(Campaign, pk=campaign)
+    sessions = Session.objects.filter(campaign=campaign)
     notes = campaign.campaign_notes.all()
-    return render(request, "sessions/campaign_detail.html", {"campaign": campaign, "sessions": sessions, "notes": notes})
+    characters = Character.objects.filter(campaign=campaign)
+    return render(request, "sessions/campaign_detail.html", {"campaign": campaign, "sessions": sessions, "notes": notes, "characters": characters})
 
 def campaign_new(request):
     """Sets up form for creating a new campaign"""
@@ -33,9 +34,16 @@ def campaign_new(request):
         form = CampaignForm()
     return render(request, "sessions/campaign_new.html", {"form": form})
 
-def session_detail(request, c, s):
+def session_detail(request, campaign, session):
     """From a campaign pk and a session pk, return details of a sesson"""
-    campaign = Campaign.objects.get(pk=c) 
-    session = Session.objects.get(pk=s)
+    campaign = Campaign.objects.get(pk=campaign) 
+    session = Session.objects.get(pk=session)
     notes = session.sessions_notes.all()
-    return render(request, "sessions/session_detail.html", {"campaign": campaign, "session":session, "notes":notes})
+    return render(request, "sessions/session_detail.html", {"campaign": campaign, "session": session, "notes": notes})
+
+def character_detail(request, campaign, character):
+    """From campaign and character pk's, return details of a character"""
+    campaign = Campaign.objects.get(pk=campaign)
+    character = Character.objects.get(pk=character)
+    notes = character.character_notes.all()
+    return render(request, "sessions/character_detail.html", {"campaign": campaign, "character": character, "notes": notes})

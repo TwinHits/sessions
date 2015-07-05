@@ -47,7 +47,7 @@ class SessionsViewsTest(TestCase):
         [self.assertTrue(n.object_id, c.pk) for n in resp.context["notes"]] 
         [self.assertTrue(ch.campaign, c.pk) for ch in resp.context["characters"]]
         #test 404
-        resp = self.client.get("sessions/" + str(len(campaigns) + 1) + "/")
+        resp = self.client.get("sessions/" + str(len(Campaign.objects.all()) + 1) + "/")
         self.assertEqual(resp.status_code, 404)
 
 
@@ -65,14 +65,14 @@ class SessionsViewsTest(TestCase):
         self.assertEqual(s.campaign.pk, resp.context["campaign"].pk)
         [self.assertTrue(n.object_id, s.pk) for n in resp.context["notes"]]
 
-    def text_character_detail(self):
+    def test_character_detail(self):
         """Test the character detail page with a random character."""
         ch = random.choice(Character.objects.all())
         #test 200 and data transfer
         resp = self.client.get("/sessions/" + str(ch.campaign.pk) + "/character/" + str(ch.pk) + "/")
-        resp.assertEqual(resp.status_code, 200)
-        resp.assertTrue("character" in resp.context)
-        resp.assertTrue("notes" in resp.context)
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue("character" in resp.context)
+        self.assertTrue("notes" in resp.context)
         #test character pk's on all data
         self.assertTrue(ch.pk, resp.context["character"].pk)
         [self.assertTrue(n.object_id, ch.pk) for n in resp.context["notes"]]

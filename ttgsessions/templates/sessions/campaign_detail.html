@@ -4,7 +4,7 @@
 	<p>
 		<ol>
 		{% for s in sessions %}
-		<li><a href='{% url "ttgsessions.views.session_detail" c=campaign.pk s=s.pk %}'>{{ s.sess_date }}</a></li>
+		<li><a href='{% url "ttgsessions.views.session_detail" campaign=campaign.pk session=s.pk %}'>{{ s.sess_date }}</a></li>
 		{% endfor %}
 		</ol>
 	</p>
