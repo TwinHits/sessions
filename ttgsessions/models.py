@@ -4,7 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 
 # Create your models here.
 '''
-    A game master can take a note and it will be logged under that particular session.
+    A gammaster can take a note and it will be logged under that particular session.
     A game master can take a note and attach it to a particular character by name.
     A game master can have multiple campaigns running with their own sessions and characters and notes
 '''

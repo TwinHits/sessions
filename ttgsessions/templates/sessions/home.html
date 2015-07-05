@@ -2,7 +2,7 @@
 {% block content %}
 	{% for c in campaigns %}
 	<div class="box">
-		<a href='{% url "ttgsessions.views.campaign_detail" pk=c.pk %}'>{{ c.name }}</a>
+		<a href='{% url "ttgsessions.views.campaign_detail" c=c.pk %}'>{{ c.name }}</a>
 	</div>
 	{% endfor %}
 	<div class="box">

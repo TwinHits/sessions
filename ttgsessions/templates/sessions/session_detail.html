@@ -1,0 +1,8 @@
+{% extends "sessions/base.html" %}
+{% block content %}
+<ul>
+	{% for n in notes %}
+	<li>{{ n.note_text }}</li>
+	{% endfor %}
+</ul>
+{% endblock %}
