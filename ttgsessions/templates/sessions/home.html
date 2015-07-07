@@ -1,8 +1,10 @@
 {% extends "sessions/base.html" %}
+{% load home_extras %}
 {% block content %}
 	{% for c in campaigns %}
 	<div class="box">
 		<a href='{% url "ttgsessions.views.campaign_detail" campaign=c.pk %}'>{{ c.name }}</a>
+		<p>{{ last_session_dates|get_item:c.pk }}</p>
 	</div>
 	{% endfor %}
 	<div class="box">

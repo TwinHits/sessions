@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.shortcuts import redirect
 from django.contrib.contenttypes.models import ContentType
+from django.db.models.query import EmptyQuerySet
 
 from .models import Campaign, Session, Character, Note 
 from .forms import CampaignForm
@@ -11,7 +12,15 @@ from .forms import CampaignForm
 def sessions_home(request):
     """Returns home page of Sessions"""       
     campaigns = Campaign.objects.all()
-    return render(request, "sessions/home.html", {"campaigns": campaigns})
+    last_session_dates = {} 
+    for i in campaigns:
+        sesses = Session.objects.filter(campaign=i)
+        if sesses:
+            last_session_dates[i.pk] = str(sesses.latest("sess_date").sess_date.date())
+        else: 
+            last_session_dates[i.pk] = "-"
+    print(last_session_dates)
+    return render(request, "sessions/home.html", {"campaigns": campaigns, "last_session_dates": last_session_dates})
 
 def campaign_detail(request, campaign):
     """Returns detail view of a campaign. This campaign is now the active campaign"""
