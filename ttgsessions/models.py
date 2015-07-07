@@ -6,13 +6,19 @@ class Campaign(models.Model):
     '''A series of connected sessions of reoccuring characters.'''
     name = models.CharField("Campaign Name", max_length=255)
     start_date = models.DateTimeField("Start Date")
-    system = {
-            "swd6": "swd6", 
-            "dnd5": "dnd5", 
-            "dnd4": "dnd4",
-            "sweoe": "sweoe",
-            "deadlands": "deadlands", 
-            }
+    swd6 = "Star Wars: D6"
+    dnd5 = "Dungeons and Dragons: 5th Edition"
+    dnd4 = "Dungeons and Dragons: 4th Edition"
+    sweoe = "Star Wars: Edge Of Empire"
+    deadlands = "Deadlands"
+    system_choices = (
+            (swd6, "Star Wars: D6"),
+            (dnd5, "Dungeons and Dragons: 5th Edition"),
+            (dnd4, "Dungeons and Dragons: 4th Edition"),
+            (sweoe, "Star Wars: Edge Of Empire"),
+            (deadlands, "Deadlands"),
+            )
+    system = models.CharField(max_length=10, choices=system_choices, default=None)
     campaign_notes = generic.GenericRelation("Note")
     def __str__(self):
         return self.name
