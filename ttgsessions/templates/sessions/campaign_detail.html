@@ -15,4 +15,11 @@
 		{% endfor%}
 		</ul>
 	</p>
+	<p>
+		<ul>
+		{% for c in characters %}
+		<li><a href='{% url "ttgsessions.views.character_detail" campaign=campaign.pk character=c.pk %}'>{{ c.name }}</a></li>
+		{% endfor%}
+		</ul>
+	</p>
 {% endblock %}

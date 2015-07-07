@@ -41,4 +41,7 @@ class Note(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
     def __str__(self):
-        return self.note_text[0:19] + "..."
+        if len(self.note_text) > 19:
+            return self.note_text[0:19] + "..."
+        else: 
+            return self.note_text

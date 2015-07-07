@@ -45,5 +45,5 @@ def character_detail(request, campaign, character):
     """From campaign and character pk's, return details of a character"""
     campaign = Campaign.objects.get(pk=campaign)
     character = Character.objects.get(pk=character)
-    notes = character.character_notes.all()
+    notes = character.notes.all()
     return render(request, "sessions/character_detail.html", {"campaign": campaign, "character": character, "notes": notes})
