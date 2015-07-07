@@ -3,7 +3,7 @@
 	<p>{{ character.name }}</p>
 	<ul>
 	{% for n in notes %}
-		<li>{{ n.pub_date }}: {{ n.note_text}}</li>
+		<li>{{ n.date }}: {{ n.text}}</li>
 	{% endfor %}	
 	</ul>
 {% endblock %}

@@ -16,7 +16,7 @@ def sessions_home(request):
     for i in campaigns:
         sesses = Session.objects.filter(campaign=i)
         if sesses:
-            last_session_dates[i.pk] = str(sesses.latest("sess_date").sess_date.date())
+            last_session_dates[i.pk] = str(sesses.latest("date").date.date())
         else: 
             last_session_dates[i.pk] = "-"
     print(last_session_dates)
@@ -26,7 +26,7 @@ def campaign_detail(request, campaign):
     """Returns detail view of a campaign. This campaign is now the active campaign"""
     campaign = get_object_or_404(Campaign, pk=campaign)
     sessions = Session.objects.filter(campaign=campaign)
-    notes = campaign.campaign_notes.all()
+    notes = campaign.notes.all()
     characters = Character.objects.filter(campaign=campaign)
     return render(request, "sessions/campaign_detail.html", {"campaign": campaign, "sessions": sessions, "notes": notes, "characters": characters})
 
@@ -36,7 +36,7 @@ def campaign_new(request):
         form = CampaignForm(request.POST)
         if form.is_valid():
             campaign = form.save(commit=False)
-            campaign.create_date = timezone.now()
+            campaign.start_date = timezone.now()
             campaign.save()
             return redirect("ttgsessions.views.campaign_detail", pk=campaign.pk)
     else:
@@ -47,7 +47,7 @@ def session_detail(request, campaign, session):
     """From a campaign pk and a session pk, return details of a sesson"""
     campaign = Campaign.objects.get(pk=campaign) 
     session = Session.objects.get(pk=session)
-    notes = session.sessions_notes.all()
+    notes = session.notes.all()
     return render(request, "sessions/session_detail.html", {"campaign": campaign, "session": session, "notes": notes})
 
 def character_detail(request, campaign, character):

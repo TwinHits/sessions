@@ -19,14 +19,14 @@ class Campaign(models.Model):
             (deadlands, "Deadlands"),
             )
     system = models.CharField(max_length=10, choices=system_choices, default=None)
-    campaign_notes = generic.GenericRelation("Note")
+    notes = generic.GenericRelation("Note")
     def __str__(self):
         return self.name
 
 class Session(models.Model):
     '''A single session of play that has a start date.'''
     sess_date = models.DateTimeField("Session Date")
-    sessions_notes = generic.GenericRelation("Note")
+    notes = generic.GenericRelation("Note")
     campaign = models.ForeignKey(Campaign)
     def __str__(self):
         return str(self.sess_date)[0:10]
@@ -41,8 +41,8 @@ class Character(models.Model):
 
 class Note(models.Model):
     '''A string of text that may be associated with a campaign, a character, or a session'''
-    note_text = models.CharField("Note", max_length=1000)
-    pub_date = models.DateTimeField("Date Taken")
+    text = models.CharField("Note", max_length=1000)
+    date = models.DateTimeField("Date Taken")
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
