@@ -76,3 +76,10 @@ class SessionsViewsTest(TestCase):
         #test character pk's on all data
         self.assertTrue(ch.pk, resp.context["character"].pk)
         [self.assertTrue(n.object_id, ch.pk) for n in resp.context["notes"]]
+
+    def test_campaign_new(self):
+        resp = self.client.post("/sessions/new/", {"name": "", "date": "", "system": ""})
+        self.assertFormError(resp, "form", "name", "This field is required.")
+        self.assertFormError(resp, "form", "date", "This field is required.")
+        self.assertFormError(resp, "form", "system", "This field is required.")
+        
