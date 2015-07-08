@@ -37,7 +37,7 @@ def campaign_new(request):
             campaign = form.save(commit=False)
             campaign.date = timezone.now()
             campaign.save()
-            return redirect("ttgsessions.views.campaign_detail", pk=campaign.pk)
+            return redirect("ttgsessions.views.campaign_detail", campaign=campaign.pk)
     else:
         form = CampaignForm()
     return render(request, "sessions/campaign_new.html", {"form": form})
