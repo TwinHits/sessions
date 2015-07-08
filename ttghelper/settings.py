@@ -26,8 +26,6 @@ SECRET_KEY = 'g5e1r-c19^20_7)kgj-+el2f5nlyd%g*)ghhgt_2l57k_@%ovv'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -76,8 +74,12 @@ WSGI_APPLICATION = 'ttghelper.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        "ENGINE": 'django.db.backends.postgresql_psycopg2',
+        "NAME": "db.sessions",
+        "USER": "admin",
+        "PASSWORD": "admin",
+        "HOST": "localhost",
+        "PORT": "",
     }
 }
 
