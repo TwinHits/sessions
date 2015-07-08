@@ -12,14 +12,14 @@ class SessionsModelsTest(TestCase):
 class SessionsViewsTest(TestCase):
     def setUp(self):
         """create dummy data"""
-        c = Campaign.objects.create(name="TestName", start_date=timezone.now())
-        s = Session.objects.create(sess_date=timezone.now(), campaign=c)
+        c = Campaign.objects.create(name="TestName", date=timezone.now(), system="Star Wars: D6")
+        s = Session.objects.create(date=timezone.now(), campaign=c)
         char = Character.objects.create(name="TwinHits", campaign=c)
-        cn = Note(content_object=c, note_text="campaign note", pub_date=timezone.now())
+        cn = Note(content_object=c, text="campaign note", date=timezone.now())
         cn.save()
-        sn = Note(content_object=s, note_text="session note", pub_date=timezone.now())
+        sn = Note(content_object=s, text="session note", date=timezone.now())
         sn.save()
-        chn = Note(content_object=char, note_text="character note", pub_date=timezone.now())
+        chn = Note(content_object=char, text="character note", date=timezone.now())
         chn.save()
 
 

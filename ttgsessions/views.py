@@ -19,7 +19,6 @@ def sessions_home(request):
             last_session_dates[i.pk] = str(sesses.latest("date").date.date())
         else: 
             last_session_dates[i.pk] = "-"
-    print(last_session_dates)
     return render(request, "sessions/home.html", {"campaigns": campaigns, "last_session_dates": last_session_dates})
 
 def campaign_detail(request, campaign):
@@ -36,7 +35,7 @@ def campaign_new(request):
         form = CampaignForm(request.POST)
         if form.is_valid():
             campaign = form.save(commit=False)
-            campaign.start_date = timezone.now()
+            campaign.date = timezone.now()
             campaign.save()
             return redirect("ttgsessions.views.campaign_detail", pk=campaign.pk)
     else:
