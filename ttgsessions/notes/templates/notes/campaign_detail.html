@@ -1,10 +1,10 @@
-{% extends "sessions/base.html" %}
+{% extends "notes/base.html" %}
 {% block content %}
 	<p>{{ campaign.name }}</p>
 	<p>
 		<ol>
 		{% for s in sessions %}
-		<li><a href='{% url "ttgsessions.views.session_detail" campaign=campaign.pk session=s.pk %}'>{{ s.date }}</a></li>
+		<li><a href='{% url "notes.views.session_detail" campaign=campaign.pk session=s.pk %}'>{{ s.date }}</a></li>
 		{% endfor %}
 		</ol>
 	</p>
@@ -18,7 +18,7 @@
 	<p>
 		<ul>
 		{% for c in characters %}
-		<li><a href='{% url "ttgsessions.views.character_detail" campaign=campaign.pk character=c.pk %}'>{{ c.name }}</a></li>
+		<li><a href='{% url "notes.views.character_detail" campaign=campaign.pk character=c.pk %}'>{{ c.name }}</a></li>
 		{% endfor%}
 		</ul>
 	</p>

@@ -19,7 +19,7 @@ def sessions_home(request):
             last_session_dates[i.pk] = str(sesses.latest("date").date.date())
         else: 
             last_session_dates[i.pk] = "-"
-    return render(request, "sessions/home.html", {"campaigns": campaigns, "last_session_dates": last_session_dates})
+    return render(request, "notes/home.html", {"campaigns": campaigns, "last_session_dates": last_session_dates})
 
 def campaign_detail(request, campaign):
     """Returns detail view of a campaign. This campaign is now the active campaign"""
@@ -27,7 +27,7 @@ def campaign_detail(request, campaign):
     sessions = Session.objects.filter(campaign=campaign)
     notes = campaign.notes.all()
     characters = Character.objects.filter(campaign=campaign)
-    return render(request, "sessions/campaign_detail.html", {"campaign": campaign, "sessions": sessions, "notes": notes, "characters": characters})
+    return render(request, "notes/campaign_detail.html", {"campaign": campaign, "sessions": sessions, "notes": notes, "characters": characters})
 
 def campaign_new(request):
     """Sets up form for creating a new campaign"""
@@ -37,21 +37,21 @@ def campaign_new(request):
             campaign = form.save(commit=False)
             campaign.date = timezone.now()
             campaign.save()
-            return redirect("ttgsessions.views.campaign_detail", campaign=campaign.pk)
+            return redirect("notes.views.campaign_detail", campaign=campaign.pk)
     else:
         form = CampaignForm()
-    return render(request, "sessions/campaign_new.html", {"form": form})
+    return render(request, "notes/campaign_new.html", {"form": form})
 
 def session_detail(request, campaign, session):
     """From a campaign pk and a session pk, return details of a sesson"""
     campaign = Campaign.objects.get(pk=campaign) 
     session = Session.objects.get(pk=session)
     notes = session.notes.all()
-    return render(request, "sessions/session_detail.html", {"campaign": campaign, "session": session, "notes": notes})
+    return render(request, "notes/session_detail.html", {"campaign": campaign, "session": session, "notes": notes})
 
 def character_detail(request, campaign, character):
     """From campaign and character pk's, return details of a character"""
     campaign = Campaign.objects.get(pk=campaign)
     character = Character.objects.get(pk=character)
     notes = character.notes.all()
-    return render(request, "sessions/character_detail.html", {"campaign": campaign, "character": character, "notes": notes})
+    return render(request, "notes/character_detail.html", {"campaign": campaign, "character": character, "notes": notes})
