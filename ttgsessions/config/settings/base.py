@@ -14,15 +14,24 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'g5e1r-c19^20_7)kgj-+el2f5nlyd%g*)ghhgt_2l57k_@%ovv'
+#the one exception to not importing from django directly into settings
+from django.core.exceptions import ImproperlyConfigured
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+def get_env_variable(var_name):
+    """Get the enviornmentable variable by its name or return exception
+        Called in child setting files.
+    """
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "set the {} environment variable".format(var_name)
+        raise ImproperlyConfigured(error_msg)
+
+
 
 ALLOWED_HOSTS = []
 # Application definition

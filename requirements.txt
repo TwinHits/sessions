@@ -1,4 +1,4 @@
-beautifulsoup4
-psycopg2
+beautifulsoup==4.4.0
+psycopg2==2.6.1
 django==1.8.2
 django-twitter-bootstrap==3.3.0
