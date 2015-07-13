@@ -17,4 +17,5 @@ DATABASES = {
     }
 }
 
-#INSTALLED_APPS += ("debug_toolbar", )
+STATICFILES_DIRS = (BASE_DIR.child("static"),)
+STATIC_URL = '/static/'
