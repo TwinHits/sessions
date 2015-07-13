@@ -20,6 +20,16 @@ class Campaign(models.Model):
             )
     system = models.CharField(choices=system_choices, default=None, max_length=255)
     notes = generic.GenericRelation("Note")
+    
+    def get_last_session_date(self):
+        """returns the date of the last session ran for this campaign, or string
+        filler to be used instead"""
+        sesses = Session.objects.filter(campaign=self)
+        if sesses:
+           return str(sesses.latest("date").date.date())
+        else: 
+            return "-"
+
     def __str__(self):
         return self.name
 

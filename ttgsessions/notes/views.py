@@ -12,13 +12,8 @@ from .forms import CampaignForm
 def sessions_home(request):
     """Returns home page of Sessions"""       
     campaigns = Campaign.objects.all()
-    last_session_dates = {} 
-    for i in campaigns:
-        sesses = Session.objects.filter(campaign=i)
-        if sesses:
-            last_session_dates[i.pk] = str(sesses.latest("date").date.date())
-        else: 
-            last_session_dates[i.pk] = "-"
+    last_session_dates = {key: key.get_last_session_date() for key in campaigns}
+    print(last_session_dates)
     return render(request, "notes/home.html", {"campaigns": campaigns, "last_session_dates": last_session_dates})
 
 def campaign_detail(request, campaign):
