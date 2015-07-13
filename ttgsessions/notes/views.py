@@ -12,9 +12,7 @@ from .forms import CampaignForm
 def sessions_home(request):
     """Returns home page of Sessions"""       
     campaigns = Campaign.objects.all()
-    last_session_dates = {key: key.get_last_session_date() for key in campaigns}
-    print(last_session_dates)
-    return render(request, "notes/home.html", {"campaigns": campaigns, "last_session_dates": last_session_dates})
+    return render(request, "notes/home.html", {"campaigns": campaigns})
 
 def campaign_detail(request, campaign):
     """Returns detail view of a campaign. This campaign is now the active campaign"""
